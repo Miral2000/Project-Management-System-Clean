@@ -1,0 +1,42 @@
+// Feature by: nour Ibrahim Elfadhli
+// This file implements the Edit Project feature
+
+#include <iostream>
+#include <string>
+#include <stdexcept>
+using namespace std;
+
+int main() {
+    string title = "Old Project Title";
+    string description = "Old Project Description";
+
+    string newTitle, newDescription;
+
+    cout << "Edit Project Info" << endl;
+
+    try {
+        cout << "Enter new title: ";
+        getline(cin, newTitle);
+
+        cout << "Enter new description: ";
+        getline(cin, newDescription);
+
+        if (newTitle.empty() || newDescription.empty()) {
+            throw invalid_argument("Title or description cannot be empty.");
+        }
+
+        title = newTitle;
+        description = newDescription;
+
+        cout << "\nProject updated successfully!" << endl;
+        cout << "New Title: " << title << endl;
+        cout << "New Description: " << description << endl;
+
+    } catch (const exception& e) {
+        cout << "Update failed: " << e.what() << endl;
+    }
+
+    return 0;
+}
+
+		
