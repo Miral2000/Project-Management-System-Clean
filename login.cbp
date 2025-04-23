@@ -1,0 +1,31 @@
+// Feature by: nour Ibrahim Elfadhli
+// This file implements the Login feature
+
+#include <iostream>
+#include <string>
+#include <stdexcept>
+using namespace std;
+
+int main() {
+    string correctUsername = "miral";
+    string correctPassword = "456";
+    string username, password;
+
+    cout << "Login Page" << endl;
+    try {
+        cout << "Enter username: ";
+        cin >> username;
+        cout << "Enter password: ";
+        cin >> password;
+
+        if (username == correctUsername && password == correctPassword) {
+            cout << "Login success!" << endl;
+        } else {
+            throw runtime_error("Invalid username or password.");
+        }
+    } catch (const exception& e) {
+        cout << "Login failed: " << e.what() << endl;
+    }
+
+    return 0;
+}
