@@ -1,3 +1,5 @@
+// Feature by: Miral Ibrahim Elfadhli
+// This file user mangment feature
 #include <iostream>
 #include <string>
 using namespace std;
@@ -19,15 +21,19 @@ public:
     void addUser(string name, string email, string password) {
         try {
             if (email.find('@') == string::npos) {
-                throw "البريد الإلكتروني غير صالح!";
+                throw "Invalid email format!";
             }
+            if (count >= MAX_USERS) {
+                throw "User list is full!";
+            }
+
             users[count].name = name;
             users[count].email = email;
             users[count].password = password;
             count++;
-            cout << "تمت إضافة المستخدم بنجاح." << endl;
+            cout << "User added successfully.\n";
         } catch (const char* msg) {
-            cout << "خطأ: " << msg << endl;
+            cout << "Error: " << msg << endl;
         }
     }
 
@@ -40,34 +46,87 @@ public:
                 }
                 count--;
                 found = true;
-                cout << "تم حذف المستخدم بنجاح." << endl;
+                cout << "User deleted successfully.\n";
                 break;
             }
         }
         if (!found) {
-            cout << "المستخدم غير موجود." << endl;
+            cout << "User not found.\n";
         }
     }
 
-    void showUsers() {
-        cout << "\nقائمة المستخدمين:\n";
+    void searchUser(string email) {
         for (int i = 0; i < count; i++) {
-            cout << "الاسم: " << users[i].name << " - البريد: " << users[i].email << endl;
+            if (users[i].email == email) {
+                cout << "User found: " << users[i].name << ", Email: " << users[i].email << endl;
+                return;
+            }
+        }
+        cout << "User not found.\n";
+    }
+
+    void showUsers() {
+        cout << "\nAll Users:\n";
+        for (int i = 0; i < count; i++) {
+            cout << "- Name: " << users[i].name << ", Email: " << users[i].email << endl;
         }
     }
 };
 
 int main() {
     UserManager manager;
+    int choice;
+    string name, email, password;
 
-    manager.addUser("Miral", "miral@example.com", "12345");
-    manager.addUser("Ali", "ali.email.com", "xyz");  // خاطيء
+    cout << "Welcome Admin - User Management System\n";
 
-    manager.showUsers();
+    do {
+        cout << "\nMenu:\n";
+        cout << "1. Add User\n";
+        cout << "2. Delete User\n";
+        cout << "3. Search User\n";
+        cout << "4. Show All Users\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
 
-    manager.deleteUser("miral@example.com");
+        switch (choice) {
+        case 1:
+            cout << "Enter name: ";
+            getline(cin, name);
+            cout << "Enter email: ";
+            getline(cin, email);
+            cout << "Enter password: ";
+            getline(cin, password);
+            manager.addUser(name, email, password);
+            break;
 
-    manager.showUsers();
+        case 2:
+            cout << "Enter email to delete: ";
+            getline(cin, email);
+            manager.deleteUser(email);
+            break;
+
+        case 3:
+            cout << "Enter email to search: ";
+            getline(cin, email);
+            manager.searchUser(email);
+            break;
+
+        case 4:
+            manager.showUsers();
+            break;
+
+        case 5:
+            cout << "Exiting program.\n";
+            break;
+
+        default:
+            cout << "Invalid choice!\n";
+        }
+
+    } while (choice != 5);
 
     return 0;
 }
