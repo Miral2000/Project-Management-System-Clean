@@ -1,0 +1,93 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+// الكلاس الأساسي للتقييم
+class Evaluation {
+public:
+    string evaluator;
+    string target;
+    int rating;
+
+    Evaluation(string e, string t, int r) {
+        evaluator = e;
+        target = t;
+        rating = r;
+    }
+};
+
+// كلاس لإدارة التقييمات
+class EvaluationManager {
+private:
+    vector<Evaluation> evaluations;
+
+public:
+    void addEvaluation(string evaluator, string target, int rating) {
+        try {
+            if (evaluator == target) {
+                throw invalid_argument(" Error: You can't evaluate yourself.");
+            }
+            if (target.empty()) {
+                throw invalid_argument(" Error: Target name cannot be empty.");
+            }
+            if (rating < 1 || rating > 5) {
+                throw invalid_argument(" Error: Rating must be between 1 and 5.");
+            }
+
+            Evaluation newEval(evaluator, target, rating);
+            evaluations.push_back(newEval);
+            cout << " Evaluation added successfully.\n";
+        }
+        catch (const exception& e) {
+            cout << e.what() << endl;
+        }
+    }
+
+    void showAllEvaluations() {
+        cout << "\n All Evaluations:\n";
+        for (Evaluation e : evaluations) {
+            cout << "- " << e.evaluator << " rated " << e.target << " with " << e.rating << " stars.\n";
+        }
+    }
+};
+
+int main() {
+    EvaluationManager manager;
+    string evaluator, target;
+    int rating;
+    int choice;
+
+    while (true) {
+        cout << "\n========= Team Evaluation =========\n";
+        cout << "1. Add Evaluation\n";
+        cout << "2. Show All Evaluations\n";
+        cout << "3. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        if (choice == 1) {
+            cout << "Enter your name: ";
+            getline(cin, evaluator);
+            cout << "Evaluate who?: ";
+            getline(cin, target);
+            cout << "Rating (1 to 5): ";
+            cin >> rating;
+            cin.ignore();
+            manager.addEvaluation(evaluator, target, rating);
+        }
+        else if (choice == 2) {
+            manager.showAllEvaluations();
+        }
+        else if (choice == 3) {
+            cout << "Exiting...\n";
+            break;
+        }
+        else {
+            cout << "Invalid choice.\n";
+        }
+    }
+
+    return 0;
+}
