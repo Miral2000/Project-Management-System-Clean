@@ -5,7 +5,7 @@
 
 ##  Features Implemented (Assignment 6):
 -  User Management – nour
--  Team Member Evaluation – 
+-  Team Member Evaluation – nour
 -  Time Table Management – Lamyaa
 -  Notifications – Lamyaa
 
