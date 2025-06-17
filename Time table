@@ -1,0 +1,88 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+// كلاس يمثل مهمة المشروع
+class Task {
+public:
+    string name;
+    string deadline;
+
+    Task(string n, string d) {
+        name = n;
+        deadline = d;
+    }
+};
+
+// كلاس لإدارة الجدول الزمني
+class TimeTableManager {
+private:
+    vector<Task> tasks;
+
+public:
+    void addTask(string name, string deadline) {
+        try {
+            if (name.empty()) {
+                throw runtime_error(" Error: Task name is required.");
+            }
+            if (deadline.empty()) {
+                throw runtime_error(" Error: Deadline is required.");
+            }
+
+            Task newTask(name, deadline);
+            tasks.push_back(newTask);
+            cout << " Task added successfully.\n";
+        }
+        catch (const exception& e) {
+            cout << e.what() << endl;
+        }
+    }
+
+    void displayTasks() {
+        if (tasks.empty()) {
+            cout << " No tasks found.\n";
+        } else {
+            cout << "\n Time Table:\n";
+            for (int i = 0; i < tasks.size(); i++) {
+                cout << i + 1 << ". " << tasks[i].name << " - " << tasks[i].deadline << endl;
+            }
+        }
+    }
+};
+
+int main() {
+    TimeTableManager manager;
+    string name, deadline;
+    int choice;
+
+    while (true) {
+        cout << "\n======= Time Table Manager =======\n";
+        cout << "1. Add Task\n";
+        cout << "2. Show All Tasks\n";
+        cout << "3. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        if (choice == 1) {
+            cout << "Enter task name: ";
+            getline(cin, name);
+            cout << "Enter deadline (e.g. 2025-07-15): ";
+            getline(cin, deadline);
+            manager.addTask(name, deadline);
+        }
+        else if (choice == 2) {
+            manager.displayTasks();
+        }
+        else if (choice == 3) {
+            cout << "Exiting...\n";
+            break;
+        }
+        else {
+            cout << "Invalid choice.\n";
+        }
+    }
+
+    return 0;
+}
