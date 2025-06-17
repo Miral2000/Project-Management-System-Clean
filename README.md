@@ -1,16 +1,15 @@
-# Project Management System
+# CS Project Management System
 
-## How to Test the System
-- Use valid and invalid inputs to test login.
-- Try editing a project and adding tasks/projects to check for correct behavior.
-- Check the output in the console to verify success or errors.
+## 📌 Description:
+نظام يساعد في متابعة وتنظيم مشاريع طلبة علوم الحاسوب.
 
-## Team Members
-- نور الايمان ابراهيم الفاضلي
-- لمياء عبد الرحيم البشيري
+## 💡 Features Implemented (Assignment 6):
+- ✅ User Management – nour
+- ✅ Team Member Evaluation – 
+- ✅ Time Table Management – Lamyaa
+- ✅ Notifications – Lamyaa
 
-## Features Implemented
-1.  Login
-2.  Edit Project
-3.  Add New Project
-4.  Add Task
+## 🚀 How to Build and Run:
+1. افتح كل ملف cpp في Code::Blocks
+2. Compile and Run
+3. جرب كل ميزة حسب التعليمات داخل الكود
