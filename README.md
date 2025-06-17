@@ -9,7 +9,7 @@
 -  Time Table Management – Lamyaa
 -  Notifications – Lamyaa
 
-## 🚀 How to Build and Run:
+##  How to Build and Run:
 1. افتح كل ملف cpp في Code::Blocks
 2. Compile and Run
 3. جرب كل ميزة حسب التعليمات داخل الكود
