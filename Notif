@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+#include <regex> // للتحقق من صيغة البريد الإلكتروني
+using namespace std;
+
+// كلاس الإشعارات
+class Notification {
+public:
+    string recipientEmail;
+    string message;
+
+    Notification(string email, string msg) {
+        recipientEmail = email;
+        message = msg;
+    }
+};
+
+// كلاس لإدارة إرسال الإشعارات
+class NotificationService {
+public:
+    void sendNotification(string email, string message) {
+        try {
+            if (email.empty()) {
+                throw runtime_error(" Error: Email is required.");
+            }
+
+            // التحقق من صيغة البريد باستخدام regex
+            regex pattern(R"(\w+@\w+\.\w+)");
+            if (!regex_match(email, pattern)) {
+                throw runtime_error("Error: Invalid email format.");
+            }
+
+            if (message.empty()) {
+                throw runtime_error(" Error: Message cannot be empty.");
+            }
+
+            Notification notification(email, message);
+            cout << " Notification sent to: " << notification.recipientEmail << endl;
+            cout << "Message: " << notification.message << endl;
+        }
+        catch (const exception& e) {
+            cout << e.what() << endl;
+        }
+    }
+};
+
+int main() {
+    NotificationService service;
+    string email, message;
+    int choice;
+
+    while (true) {
+        cout << "\n======= Notification Service =======\n";
+        cout << "1. Send Notification\n";
+        cout << "2. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        if (choice == 1) {
+            cout << "Enter recipient email: ";
+            getline(cin, email);
+            cout << "Enter message: ";
+            getline(cin, message);
+            service.sendNotification(email, message);
+        }
+        else if (choice == 2) {
+            cout << "Exiting...\n";
+            break;
+        }
+        else {
+            cout << "Invalid choice.\n";
+        }
+    }
+
+    return 0;
+}
