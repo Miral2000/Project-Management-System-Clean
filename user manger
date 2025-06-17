@@ -1,0 +1,112 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class User {
+public:
+    string name;
+    string email;
+    string password;
+
+    User(string n, string e, string p) {
+        name = n;
+        email = e;
+        password = p;
+    }
+};
+
+class UserManager {
+private:
+    vector<User> users;
+
+public:
+    void addUser(string name, string email, string password) {
+        try {
+            if (email.empty()) {
+                throw runtime_error("Error: Email cannot be empty.");
+            }
+            if (password.length() < 6) {
+                throw runtime_error("Error: Password must be at least 6 characters.");
+            }
+
+            User newUser(name, email, password);
+            users.push_back(newUser);
+            cout << "User added successfully!\n";
+        }
+        catch (const exception& ex) {
+            cout << ex.what() << endl;
+        }
+    }
+
+    void deleteUser(string email) {
+        try {
+            bool found = false;
+            for (int i = 0; i < users.size(); i++) {
+                if (users[i].email == email) {
+                    users.erase(users.begin() + i);
+                    cout << " User deleted successfully!\n";
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                throw runtime_error(" Error: User not found.");
+            }
+        }
+        catch (const exception& ex) {
+            cout << ex.what() << endl;
+        }
+    }
+
+    void showUsers() {
+        cout << "\n📋 Current Users:\n";
+        for (User u : users) {
+            cout << "- " << u.name << " (" << u.email << ")\n";
+        }
+    }
+};
+
+int main() {
+    UserManager manager;
+    string name, email, password;
+    int choice;
+
+    while (true) {
+        cout << "\n========== User Management ==========\n";
+        cout << "1. Add User\n";
+        cout << "2. Delete User\n";
+        cout << "3. Show All Users\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        if (choice == 1) {
+            cout << "Enter name: ";
+            getline(cin, name);
+            cout << "Enter email: ";
+            getline(cin, email);
+            cout << "Enter password: ";
+            getline(cin, password);
+            manager.addUser(name, email, password);
+        }
+        else if (choice == 2) {
+            cout << "Enter email of user to delete: ";
+            getline(cin, email);
+            manager.deleteUser(email);
+        }
+        else if (choice == 3) {
+            manager.showUsers();
+        }
+        else if (choice == 4) {
+            cout << "Exiting...\n";
+            break;
+        }
+        else {
+            cout << "Invalid choice.\n";
+        }
+    }
+
+    return 0;
+} 
