@@ -1,13 +1,13 @@
 # CS Project Management System
 
-## 📌 Description:
+##  Description:
 نظام يساعد في متابعة وتنظيم مشاريع طلبة علوم الحاسوب.
 
-## 💡 Features Implemented (Assignment 6):
-- ✅ User Management – nour
-- ✅ Team Member Evaluation – 
-- ✅ Time Table Management – Lamyaa
-- ✅ Notifications – Lamyaa
+##  Features Implemented (Assignment 6):
+-  User Management – nour
+-  Team Member Evaluation – 
+-  Time Table Management – Lamyaa
+-  Notifications – Lamyaa
 
 ## 🚀 How to Build and Run:
 1. افتح كل ملف cpp في Code::Blocks
